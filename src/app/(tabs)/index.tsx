@@ -1,28 +1,34 @@
 // HOME PAGE OF APP
 
-import { Text, View, StyleSheet, Button } from "react-native";
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import { Button } from "react-native";
+import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { useLocation } from "@/src/context/LocationContext";
 import { useEffect, useRef } from "react";
+
+import Box from "../../components/common/Box";
+import Text from "../../components/common/Text";
 
 export default function Home() {
   const { location, errorMsg, refreshLocation } = useLocation();
 
   const mapRef = useRef<MapView | null>(null);
 
-  const DEFAULT_REGION = { // San Fransisco
-    latitude: 37.33, 
+  const DEFAULT_REGION = {
+    // San Fransisco
+    latitude: 37.33,
     longitude: -122,
     latitudeDelta: 2,
     longitudeDelta: 2,
-  }
+  };
 
-  const INITIAL_REGION = location ? {
-    latitude: location.latitude,
-    longitude: location.longitude,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
-  } : DEFAULT_REGION;
+  const INITIAL_REGION = location
+    ? {
+        latitude: location.latitude,
+        longitude: location.longitude,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      }
+    : DEFAULT_REGION;
 
   useEffect(() => {
     if (location && mapRef.current) {
@@ -40,45 +46,42 @@ export default function Home() {
   if (errorMsg) return <Text>{errorMsg}</Text>;
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
+    <Box
+      flex={1} // fill the screen
+      justifyContent="center" // center content vertically
+      alignItems="center" // center content horizontally
+      backgroundColor="background"
+      padding="m"
     >
-      <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 20, marginBottom: 20 }}>HoopMap</Text>
-      <MapView
-        style={{ ...styles.map, ...{ opacity: location ? 1 : .6  }}}
-        provider = {PROVIDER_GOOGLE}
-        initialRegion={INITIAL_REGION}
-        showsUserLocation
-        showsMyLocationButton
-        ref={mapRef}
-      />
+      <Text variant="header" marginBottom="l"> HoopMap </Text>
 
-      {location ? (<></>) : (
-        <Text>Loading location...</Text>
+      <Box
+        width="100%"
+        height="60%"
+        borderRadius="m"
+        overflow="hidden"
+        marginBottom="m"
+        style={{ opacity: location ? 1 : 0.6 }}
+      >
+        <MapView
+          provider={PROVIDER_GOOGLE}
+          initialRegion={INITIAL_REGION}
+          showsUserLocation
+          showsMyLocationButton
+          ref={mapRef}
+          style={{ flex: 1 }}
+        />
+      </Box>
+
+      {!location && (
+        <Text variant="body" marginBottom="m">
+          Loading location...
+        </Text>
       )}
-      <Button title="Refresh Location" onPress={refreshLocation} />
-    </View>
+
+      <Box marginTop="m">
+        <Button title="Refresh Location" onPress={refreshLocation} />
+      </Box>
+    </Box>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-
-  description: {
-    fontSize: 6,
-    fontWeight: 500,
-  },
-
-  map: {
-    width: '80%',
-    height: '50%',
-    borderRadius: 12,
-  },
-
-});

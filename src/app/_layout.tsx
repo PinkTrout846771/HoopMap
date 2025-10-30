@@ -1,9 +1,13 @@
 import { Stack } from 'expo-router';
+import { ThemeProvider } from "@shopify/restyle";
+import theme from '../themes/default';
 
 export default function Layout() {
   return (
-    <Stack>
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-    </Stack>
+    <ThemeProvider theme={theme}>
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      </Stack>
+    </ThemeProvider>
   );
 }
