@@ -1,10 +1,11 @@
 // HOME PAGE OF APP
 
-import { Button } from "react-native";
-import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { useLocation } from "@/src/context/LocationContext";
 import { useEffect, useRef } from "react";
+import { Button } from "react-native";
+import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 
+import React from "react";
 import Box from "../../components/common/Box";
 import Text from "../../components/common/Text";
 

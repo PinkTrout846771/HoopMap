@@ -25,6 +25,7 @@ const theme = createTheme({
     accent: palette.accent,
   },
   spacing: {
+    xs: 4,
     s: 8,
     m: 16,
     l: 24,
@@ -42,7 +43,18 @@ const theme = createTheme({
       fontSize: 34,
       color: 'text',
     },
+    header2: {
+      fontWeight: "600",
+      fontSize: 24,
+      color: 'text',
+    },
+    header3: {
+      fontWeight: "500",
+      fontSize: 20,
+      color: 'text',
+    },
     body: {
+      fontWeight: "350",
       fontSize: 16,
       lineHeight: 24,
       color: 'text',

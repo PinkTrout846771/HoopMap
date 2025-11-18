@@ -1,8 +1,9 @@
+import { LocationProvider } from "@/src/context/LocationContext";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { Tabs } from "expo-router";
-import { LocationProvider } from "@/src/context/LocationContext";
 import { useTheme } from "@shopify/restyle";
+import { Tabs } from "expo-router";
+import React from "react";
 import { Theme } from "../../themes/default";
 
 export default function TabLayout() {
@@ -16,7 +17,6 @@ export default function TabLayout() {
           tabBarStyle: { backgroundColor: theme.colors.background },
           tabBarLabelStyle: { color: theme.colors.text, fontSize: theme.textVariants.tabBar.fontSize, fontWeight: "bold"},
           headerShown: false,
-          
         }}
       >
         <Tabs.Screen
